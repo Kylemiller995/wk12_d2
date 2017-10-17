@@ -6,6 +6,7 @@ var MapWrapper = function (map, center, zoom) {
   });
   this.markers = [];
   this.bounceMarkers = this.bounceMarkers.bind(this)
+  this.handleTeleport = this.handleTeleport.bind(this);
 }
 
 MapWrapper.prototype.handleTeleport = function () {
@@ -22,9 +23,11 @@ MapWrapper.prototype.addMarker = function (coords) {
   })
   this.markers.push(marker)
   var infowindow = new google.maps.InfoWindow({
-    content: 'I have become death, destroyer of worlds '
+    content: "lat" + coords.lat + "   " + "lng" +coords.lng
   });
-  infowindow.open(marker.map, marker)
+  marker.addListener('click', function() {
+    infowindow.open(marker.map, marker)
+  })
 }
 
 MapWrapper.prototype.addClickEvent = function () {
