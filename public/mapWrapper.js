@@ -7,6 +7,7 @@ var MapWrapper = function (map, center, zoom) {
   this.markers = [];
   this.bounceMarkers = this.bounceMarkers.bind(this)
   this.handleTeleport = this.handleTeleport.bind(this);
+  this.handleSelfTeleport = this.handleSelfTeleport.bind(this);
 }
 
 MapWrapper.prototype.handleTeleport = function () {
@@ -50,4 +51,15 @@ MapWrapper.prototype.handleTeleport = function () {
   var coords = new google.maps.LatLng(-34.397, 150.644)
   console.log(this.googleMap)
   this.googleMap.setCenter(coords)
+}
+
+
+MapWrapper.prototype.handleSelfTeleport = function () {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var pos = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+    this.googleMap.setCenter(pos)
+  }.bind(this))
 }

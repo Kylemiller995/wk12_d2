@@ -13,6 +13,8 @@ var initialize = function(container, coords, zoom) {
   var teleporter = document.querySelector('#teleporter');
   console.log(teleporter)
   teleporter.addEventListener('click', mainMap.handleTeleport)
+  var selfTeleporter = document.querySelector('#self-teleport')
+  selfTeleporter.addEventListener('click', mainMap.handleSelfTeleport)
 }
 
 
